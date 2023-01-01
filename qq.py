@@ -17,8 +17,10 @@ for i in datalist:
     try:
         tmphtml=requests.get(i[1]).text
         tmpbs=bs(tmphtml,"html.parser")
-        ss=str(tmpbs.select("div.LEFT div.content.clearfix")[0])
-        s=f"<h1>{i[0]}</h1>"+ss
+        ss=tmpbs.select("div.content-article")
+        print(tmphtml)
+        print(ss)
+        s=f"<h1>{i[0]}</h1>"+str(ss[0])
         s=s.replace("//inews.gtimg.com","https://inews.gtimg.com").replace("</img>","</img><br/>")
         s=html2text.html2text(s)
         if len(s.split())<=3:
